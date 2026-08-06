@@ -6,10 +6,10 @@ interface FormProps {
 }
 
 export default function NoteForm({ onAddNote }: FormProps) {
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [tags, setTags] = useState("");
-  const [error, setError] = useState("");
+  const [title, setTitle] = useState<string>("");
+  const [content, setContent] = useState<string>("");
+  const [tags, setTags] = useState<string>("");
+  const [error, setError] = useState<string>("");
 
   const onSubmit = (e: React.SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -18,16 +18,19 @@ export default function NoteForm({ onAddNote }: FormProps) {
       setError("Название обязательно");
       return;
     }
+
     const tagsArray = tags
       .split(",")
       .map((t) => t.trim())
       .filter(Boolean);
+
     onAddNote({
       id: Date.now(),
       title: trimmedTitle,
       content: content.trim() || undefined,
       tags: tagsArray.length ? tagsArray : undefined,
     });
+
     setError("");
     setTitle("");
     setContent("");
