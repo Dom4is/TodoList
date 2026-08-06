@@ -9,7 +9,9 @@ function App() {
   // Загружаем заметки из localStorage, сортируем по id (новые сверху)
   const [notes, setNotes] = useState<NoteType[]>(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
+
     if (!saved) return [];
+
     try {
       const parsed = JSON.parse(saved);
       // Сортируем по убыванию id (новые сверху)
