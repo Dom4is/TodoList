@@ -1,9 +1,9 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 export default function useLocalStorage<T>(
   key: string,
   initialValue: T,
-): [T, (value: T) => void] {
+): [T, (value: T | ((prev: T) => T)) => void] {
   const [storedValue, setStoredValue] = useState<T>(() => {
     try {
       //Читаем значение localStorage или берем начальное
@@ -29,9 +29,12 @@ export default function useLocalStorage<T>(
     }
   }, [key, storedValue]);
 
-  const setValue = (value: T) => {
-    setStoredValue(value);
-  };
+  const setValue = useCallback((value: T | ((prev: T) => T)) => {
+    setStoredValue((prev) => {
+      const newValue = value instanceof Function ? value(prev) : value;
+      return newValue;
+    });
+  }, []);
 
   return [storedValue, setValue];
 }
