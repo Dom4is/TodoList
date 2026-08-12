@@ -3,13 +3,14 @@ import type { NoteType } from "../../@types/types";
 
 interface NoteListProps {
   notes: NoteType[];
-  setNotes(notes: NoteType[] | ((prev: NoteType[]) => NoteType[])): void;
+  onDelete(id: number): void;
 }
 
-export default function NoteList({ notes, setNotes }: NoteListProps) {
-  const handleDelete = (id: number) => {
-    setNotes((prev) => prev.filter((n) => n.id !== id));
-  };
+export default function NoteList({ notes, onDelete }: NoteListProps) {
+  // {Delete note }
+  // const handleDelete = (id: number) => {
+  //   setNotes((prev) => prev.filter((n) => n.id !== id));
+  // };
 
   if (notes.length === 0) {
     return (
@@ -26,7 +27,7 @@ export default function NoteList({ notes, setNotes }: NoteListProps) {
   return (
     <ul className="w-full max-w-2xl mx-auto space-y-4">
       {notes.map((note) => (
-        <Note key={note.id} {...note} onDelete={() => handleDelete(note.id)} />
+        <Note key={note.id} {...note} onDelete={() => onDelete(note.id)} />
       ))}
     </ul>
   );
