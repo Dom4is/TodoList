@@ -1,26 +1,33 @@
+import { useSelector, useDispatch } from "react-redux";
+import type { RootState, AppDispatch } from "./app/store/store";
+import { addNote, removeNote } from "./app/store/notesSlice";
+
 import NoteList from "./features/NoteList/NoteList";
 import NoteForm from "./features/NoteForm/NoteForm";
 import type { NoteType } from "./@types/types";
 import Header from "./shared/ui/Header/Header";
-import useLocalStorage from "./shared/hooks/useLocalStorage/useLocalStorage";
+// import useLocalStorage from "./shared/hooks/useLocalStorage/useLocalStorage";
 import { useState } from "react";
 import Search from "./features/Search/Search";
 
-const STORAGE_KEY = "notes";
+// const STORAGE_KEY = "notes";
 
 function App() {
   // Загружаем заметки из localStorage, сортируем по id (новые сверху)
-  const [notes, setNotes] = useLocalStorage<NoteType[]>(STORAGE_KEY, []);
+  // const [notes, setNotes] = useLocalStorage<NoteType[]>(STORAGE_KEY, []);
+  const dispatch = useDispatch<AppDispatch>();
+  const notes = useSelector((state: RootState) => state.notes.notes);
+
   const [searchQuery, setSearchQuery] = useState<string>("");
 
   // Добавление заметки (новая – в начало)
-  const addNote = (newNote: NoteType): void => {
-    setNotes((prev: NoteType[]) => [newNote, ...prev]);
+  const handleAddNote = (newNote: NoteType): void => {
+    dispatch(addNote(newNote));
   };
 
   //Удаление заметки
-  const handleDelete = (id: number) => {
-    setNotes((prev) => prev.filter((n) => n.id !== id));
+  const handleRemoveNote = (id: number) => {
+    dispatch(removeNote(id));
   };
 
   const filteredNotes = notes.filter((note) =>
@@ -34,13 +41,13 @@ function App() {
         <Header countNotes={notes.length} />
 
         {/* Форма создания */}
-        <NoteForm onAddNote={addNote} />
+        <NoteForm onAddNote={handleAddNote} />
 
         {/* {Поиск} */}
         <Search value={searchQuery} onChange={setSearchQuery} />
 
         {/* Список заметок */}
-        <NoteList notes={filteredNotes} onDelete={handleDelete} />
+        <NoteList notes={filteredNotes} onDelete={handleRemoveNote} />
       </div>
     </div>
   );
