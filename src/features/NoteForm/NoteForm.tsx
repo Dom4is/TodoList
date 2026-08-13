@@ -39,8 +39,8 @@ export default function NoteForm({ onAddNote }: FormProps) {
 
   return (
     <form onSubmit={onSubmit} className="w-full max-w-2xl mx-auto mb-10">
-      <div className="bg-white rounded-2xl shadow-lg p-6 space-y-4 border border-gray-100">
-        <h2 className="text-2xl font-semibold text-slate-800 flex items-center gap-2">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 space-y-4 border border-gray-100 dark:border-gray-700 transition-colors">
+        <h2 className="text-2xl font-semibold text-slate-800 dark:text-white flex items-center gap-2">
           <span className="text-indigo-500">✍️</span> Новая заметка
         </h2>
 
@@ -51,10 +51,10 @@ export default function NoteForm({ onAddNote }: FormProps) {
               type="text"
               placeholder="Заголовок *"
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 transition-all outline-none text-slate-800 placeholder:text-slate-400"
+              className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 dark:bg-gray-900/50 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 focus:bg-white dark:focus:bg-gray-800 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900 transition-all outline-none text-slate-800 placeholder:text-slate-400"
             />
             {error && (
-              <p className="mt-1.5 text-sm text-red-500 bg-red-50 px-3 py-1 rounded-lg inline-block">
+              <p className="mt-1.5 text-sm text-red-500 dark:text-red-400 bg-red-50 dark:bg-red-900/30 px-3 py-1 rounded-lg inline-block">
                 ⚠️ {error}
               </p>
             )}
@@ -65,7 +65,7 @@ export default function NoteForm({ onAddNote }: FormProps) {
             placeholder="Содержание (необязательно)"
             onChange={(e) => setContent(e.target.value)}
             rows={3}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 transition-all outline-none resize-y text-slate-800 placeholder:text-slate-400"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 dark:bg-gray-900/50 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 focus:bg-white dark:focus:bg-gray-800 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900 transition-all outline-none resize-y text-slate-800 placeholder:text-slate-400"
           />
 
           <input
@@ -73,7 +73,7 @@ export default function NoteForm({ onAddNote }: FormProps) {
             type="text"
             placeholder="Теги через запятую (например: react, ui, идея)"
             onChange={(e) => setTags(e.target.value)}
-            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 focus:bg-white focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 transition-all outline-none text-slate-800 placeholder:text-slate-400"
+            className="w-full px-4 py-3 rounded-xl border border-gray-200 bg-gray-50/50 dark:bg-gray-900/50 dark:border-gray-600 dark:text-white dark:placeholder-gray-400 focus:bg-white dark:focus:bg-gray-800 focus:border-indigo-400 focus:ring-4 focus:ring-indigo-100 dark:focus:ring-indigo-900 transition-all outline-none text-slate-800 placeholder:text-slate-400"
           />
 
           <button

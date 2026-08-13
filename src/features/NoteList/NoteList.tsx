@@ -16,10 +16,12 @@ export default function NoteList({ notes, onDelete }: NoteListProps) {
     return (
       <div className="text-center py-16 px-4">
         <div className="text-6xl mb-4">📭</div>
-        <h3 className="text-2xl font-medium text-slate-700">
+        <h3 className="text-2xl font-medium text-slate-700 dark:text-slate-200">
           Пока нет заметок
         </h3>
-        <p className="text-slate-400 mt-1">Создайте свою первую заметку выше</p>
+        <p className="text-slate-400 dark:text-slate-500 mt-1">
+          Создайте свою первую заметку выше
+        </p>
       </div>
     );
   }

@@ -9,14 +9,14 @@ export default function Note({ title, content, tags, onDelete }: NoteProps) {
 
   return (
     <li className="group w-full transition-all duration-200 hover:-translate-y-0.5">
-      <div className="bg-white rounded-2xl shadow-sm hover:shadow-xl border border-gray-100/80 p-5 flex items-start gap-4 transition-all">
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm hover:shadow-xl border border-gray-100/80 dark:border-gray-700 p-5 flex items-start gap-4 transition-all">
         {/* Контент */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-xl font-semibold text-slate-800 leading-tight">
+          <h3 className="text-xl font-semibold text-slate-800 dark:text-slate-100 leading-tight">
             {title}
           </h3>
           {content && (
-            <p className="mt-1.5 text-slate-600 leading-relaxed whitespace-pre-wrap">
+            <p className="mt-1.5 text-slate-600 dark:text-slate-300 leading-relaxed whitespace-pre-wrap">
               {content}
             </p>
           )}
@@ -37,7 +37,7 @@ export default function Note({ title, content, tags, onDelete }: NoteProps) {
         {/* Кнопка удаления */}
         <button
           onClick={onDelete}
-          className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-200"
+          className="shrink-0 w-9 h-9 rounded-full flex items-center justify-center text-slate-400 dark:text-slate-500 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/30 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-red-200 dark:focus:ring-red-800"
           aria-label="Удалить заметку"
         >
           <svg

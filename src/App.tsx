@@ -7,8 +7,9 @@ import NoteForm from "./features/NoteForm/NoteForm";
 import type { NoteType } from "./@types/types";
 import Header from "./shared/ui/Header/Header";
 // import useLocalStorage from "./shared/hooks/useLocalStorage/useLocalStorage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Search from "./features/Search/Search";
+import useTheme from "./shared/hooks/useTheme/useTheme";
 
 // const STORAGE_KEY = "notes";
 
@@ -17,6 +18,17 @@ function App() {
   // const [notes, setNotes] = useLocalStorage<NoteType[]>(STORAGE_KEY, []);
   const dispatch = useDispatch<AppDispatch>();
   const notes = useSelector((state: RootState) => state.notes.notes);
+
+  const { state } = useTheme();
+
+  useEffect(() => {
+    // document.documentElement.setAttribute("data-theme", state.theme);
+    if (state.theme === "dark") {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [state.theme]);
 
   const [searchQuery, setSearchQuery] = useState<string>("");
 
@@ -35,7 +47,7 @@ function App() {
   );
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 to-gray-100 py-10">
+    <div className="min-h-screen bg-linear-to-br from-slate-50 to-gray-100 dark:from-slate-900 dark:to-gray-950 py-10">
       <div className="container mx-auto px-4">
         {/* Заголовок */}
         <Header countNotes={notes.length} />
